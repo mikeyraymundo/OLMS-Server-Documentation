@@ -75,6 +75,22 @@
 </body>
 <?php
 
+/**
+*	This module allows the user to log in to the system
+*	If a user has been assigned an ADMINISTRATOR account, he/she will be taken to the View Leads page
+*	If a user has been assigned an AGENT account, he/she will be taken to the Manage Leads page
+*	In this page, the website connects to the database to determine which user accounts are administrators or agents
+*	It is through db_query.php that the website is able to connect to the database
+*	
+*	$username is the variable that contains the value that the user enters using $_POST 
+*	which is an associative array of variables passed to the current script
+*	$password is the variable that contains the value that the user enters using $_POST. 
+*	The POST request method in HTML is designed to request that a web server accepts the 
+*	data enclosed in the request message for storage. In this case, it requests to store
+*	the password
+* 
+*/
+
     include_once("db_query.php");
     db_connection();
 
@@ -85,23 +101,6 @@
         
     //Checks if there the entered details matches the details of a registered user
         login_verification($username, $password);
-        
-            
-        //Initializes session if the entered details match the details of an existing user
-        //if (("$Username"=="$username") && ("$Password"=="$password"))
-        //{
-
-            //echo '$Username';
-        //  echo "$username";
-        //  echo '$squery';
-
-            
-    //  }
-        //else
-        //{
-            
-            //echo 'wrong username or password';
-        //}
     }
 ?>
 
