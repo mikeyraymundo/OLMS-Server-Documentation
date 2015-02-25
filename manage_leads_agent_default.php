@@ -39,6 +39,12 @@
 </head>
 
 <?php
+
+/**
+ *	This function sets up the table for managing leads on the agent's perspective. It sets
+ *	the default setup of manage leads module.			
+ */
+ 
     include_once("db_query.php");
     db_connection();
     // session_details();
