@@ -1,22 +1,51 @@
 <?php
 
-
+/**
+ *  This function connects the program to the mysql database
+ *
+ *  $db is a resource and references PHP's special built-in mysql_connect function. The 
+ *  mysql_connect function is used to connect the program to the database and localhost.
+ *  
+ *  @var resource
+ *  
+ *  
+*/
 
 function db_connection()
 {
 	
 		$db = mysql_connect("localhost", "root", "root");
-
         //SELECT DB
-        mysql_select_db("wts_olms", $db);
-
-
-//SELECT DB
-
-
-	
+        mysql_select_db("wts_olms", $db);	
 }
 
+/**
+*   This function checks if the user filled up both the username and password fields. If
+*   the user does not fill up both fields, the page displays a prompt that informs the
+*   user that both fields need to be filled up.
+*   It checks whether the username and password is assigned to an administrator or agent.
+*   
+*   $squery is a resource that references the mysql query to select all rows in the database
+*   according to the conditions. In this case, it will search for the username and password
+*   the user had input
+*   // lagay after description --> @var resource
+
+*   $result passes $squery through the special php function mysql_query which sends a unique
+*   query to the currently active database
+*   //@link http://php.net/manual/en/function.mysql-query.php
+
+*   $row passes the result through the special php function mysql_fetch_array that returns
+*   an array that corresponds to the fetched row
+*   //@link http://php.net/manual/en/function.mysql-fetch-array.php
+
+*   $_SESSION is an associative array containing session variables available to the current
+*   script
+*   @link http://php.net/manual/en/reserved.variables.session.php
+*
+*   @param string $username The username that the user will input
+*   @param string $password The password that the user will input
+*   
+*/
 
 function login_verification($username, $password)
 {
@@ -59,12 +88,57 @@ function login_verification($username, $password)
 	
 }
 
+/**
+*   This function allows the program to initiate a session or resume the current one
+*
+*   session_start() creates a session or resumes the current one based on a session 
+*   identifier passed via a GET or POST request, or passed via a cookie. When this function 
+*   is called or when a session automatically starts, PHP will call the open and read 
+*   session save handlers
+*
+*   $login_id passes the username of the user into the $_SESSION array
+*   $name passes the user's registered full name into the $_SESSION array
+*   
+*   @var resource
+
+*/
+
 function session_details()
 {
 	session_start();
 	 $login_id=$_SESSION['User_ID'];
     $name=$_SESSION['name'];
 }
+
+/**
+*   This function allows an administrator account to add a new user of the system in its
+*   list of registered accounts. It allows the user to input the pertinent information 
+*   regarding the details of an account within the system. If the user does not fill up 
+*   all the fields, the system will prompt the user to fill up all the fields. If the 
+*   administrator inputs a username that is already in the database (username is already 
+*   taken), the system will inform the administrator that the username has input already
+*   belongs to an account and he must input a different one. The user is required to 
+*   re-input the password that he/she is to set for the new account thus the passwords --
+*   the one initially entered and the one asked for confirmation -- must match 
+*
+*   $repeatcheck is a resource that uses the special mysql function mysql_query to check
+*   if the username the administrator inputs already exists in the database
+*   $iquery allows the program to insert the query and information into the database
+*   
+*   my_real_escape_string is a function which returns the escaped string version of the
+*   given string. It allows the program to escape special characters in a string for use 
+*   in an SQL statement.
+*   
+*   @param string $username The username that the administrator will input
+*   @param string $password1 The first password that the administrator will set for the 
+*   new account
+*   @param string $password2 The second password that the administrator will input in order
+*   to confirm the password for the new account
+*   @param string $fullname The first name, middle initial? and last name of the person
+*   the administrator is making an account for
+*   @param string $account_type The type of account the user selects for the new account
+*   @var resource
+*/
 function add_account($username, $password1, $password2, $fullname, $account_type)
 {
 	
@@ -90,12 +164,9 @@ function add_account($username, $password1, $password2, $fullname, $account_type
                 else
                 {
                   echo "<script type='text/javascript'>alert('Username Exists');</script>";
-                }
-                
-                
-
-            
+                }          
 }
+
 
 function add_country($state, $country, $selected_timezone, $radio)
 {       
@@ -162,6 +233,20 @@ function add_city($country, $state, $county, $city, $selected_timezone)
 
 }
 
+/**
+*   This function allows the user to add a new campaign in the database. It allows the 
+*   system to check whether a campaign already exists in the database. If a campaign 
+*   already exists, the system will not add the campaign the user had input. When adding a
+*   new campaign, the system requires all fields to be filled up. If the user does not fill 
+*   up all the fields, the system will not add the campaign and will subsequently prompt 
+*   the user to fill up all of the forms. 
+*
+*   @param string $campaign_name The name of the new campaign the user will input
+*   @param string $company The name of the company associated with the campaign
+*   @param string $creation_date The date when the campaign was initiated
+*   @var resource
+*/
+
 function add_campaign($campaign, $company)
 {
     //query to check if the campaign name already exists 
@@ -195,6 +280,13 @@ function add_campaign($campaign, $company)
 	    echo "<script type='text/javascript'>alert('Added New Campaign'); location.href='campaign_management.php'</script>";
     }
 }
+
+/**
+*   This function allows 
+*
+*   @param string $status_name The name of the new status the user will input
+*   @param string $description The description of the new status
+*/
 function add_status($status, $description)
 {
     $status=mysql_real_escape_string($status);
@@ -217,6 +309,15 @@ function add_status($status, $description)
         echo "<script type='text/javascript'>alert('Added New Status'); location.href='campaign_management.php'</script>";
     }
 }
+
+/**
+*   This function allows the administrator to assign selected agents into a campaign.
+*   $insert_query passes a unique query to the currently active database on the server.
+*   It inserts the user_id and campaign_id into the agent_list
+*
+*   @param string $user_id The ID of the agent that exists in the database
+*   @param string $campaign_id The ID of the campaign that exists in the database where the selected agents will be assigned to
+*/
 function assign_agents($user_id, $campaign_id)
 {
     
@@ -241,6 +342,21 @@ function delete_agent($user_id)
     echo "<script type='text/javascript'>alert('User Deleted'); location.href='account_management.php'</script>";
 }
 
+/**
+*   This function allows the administrator to edit the account details of the accounts currently existing in the database.
+*   This function also checks if the first name, middle name, last name, username, password, and re-enter password fields have been filled up.
+*   This function also checks if the password field and re-enter password field inputs are the same.
+*
+*   $updatequery passes a unique query to the currently active database on the server.
+*   It inserts the new first name, middle name, last name, username and password into the account
+*
+*   @param string $update_id The account ID that the details will be updated that exists in the database
+*   @param string $fullname The first name, middle name, and last name of the account to be updated in the database
+*   @param string $username The username of the account to be updated in the database
+*   @param string $password The password of the account to be updated in the database
+*   @param string $password2 The re-enter password to be compared if similar to $password
+*   @var resource
+*/
 function edit_account($update_id, $fullname, $username, $password,$password2, $account_type, $original_name)
 {
 	if(empty($username) || empty($password) ||   empty($fullname) || empty($password2))
