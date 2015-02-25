@@ -24,6 +24,17 @@
 
 </head>
 <?php
+
+/**
+*	This module allows the user of the system to choose a campaign from the search query 
+*	according to campaign id. The update_campaign function is called.
+*	
+*	$searchquery gets the value searched in campaign table according to campaign id
+*
+*	@var resource
+*	
+*/
+
 	//CREATE DB CONNECTION
 	include_once("db_query.php");
 	db_connection();
