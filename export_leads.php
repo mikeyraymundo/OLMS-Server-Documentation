@@ -1,5 +1,18 @@
 <?php
-
+/**
+ *	This module allows the user to export leads into a .csv file. The function sets the 
+ *	first row of the csv file as containing detail headers such as contact_prefix, company_name,
+ *	phone numbers etc. 
+ *
+ *	"ini_set" sets the value of a configuration point. he configuration option will keep 
+ *	this new value during the script's execution, and will be restored at the script's ending. 
+ *	"mysql_set_charset" sets the client character set. It sets the default character set 
+ *	for the current connection. UTF8 is used. UTF8 is once again selected in 
+ *	mb_internal_encoding. A valid character set must be used.
+ *
+ *	@var resource
+ *
+ */
     $output = "contact_prefix,contact_first_name,contact_middle_name,contact_last_name,contact_suffix,contact_title,company_name,primary_add_1,primary_add_2,primary_city, primary_county,primary_state,primary_zip,primary_zip_extension,primary_country,phone_number,toll_free,fax_number,web_address,latitude,longtitude,line_of_business,is_importer,is_exporter,total_employees,year_founded,primary_industry,email \n";
     include_once("db_query.php");
     db_connection();
