@@ -38,6 +38,16 @@
 </head>
 
 <?php
+
+/**
+*	This module allows the system to manage the lit of leads according to status id
+*
+*	$select_query is the query that allows selection of status id from statuses in a 
+*	specific campaign 
+*
+*	@var resource
+*/
+
     include_once("db_query.php");
     db_connection();
     // session_details();
