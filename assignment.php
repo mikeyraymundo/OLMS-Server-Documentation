@@ -37,6 +37,17 @@
 </head>
 
 <?php
+/**
+* This function allows the administrator to assign leads to a campaign and also assign leads to an agent belonging to a specific industry.
+* This function uses the db_connection() function from the db_query.php file.
+*
+* $login_id contains the specific User_ID for that session.
+* $name contains the specific name of the user for that session.
+* $get_name contains the special MySQL function mysql_query that selects the campaign name
+* $row puts the results of the $get_name query into an array.
+* $name stores the selected campaign from the array
+*
+*/
     include_once("db_query.php");
     db_connection();
     session_start();
