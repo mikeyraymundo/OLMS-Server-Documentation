@@ -1,4 +1,17 @@
 <?php
+
+/**
+*   This allows the system to connect to the database.
+*   This uses the db_connection() function from the db_query.php file.
+*   $selected_campaign contains the chosen campaign by the user of the system.
+*   $table will contain the results of the query.
+*   $query contains the query to be used in the database.
+*   $result uses the special PHP function mysql_query function. The mysql_query function uses $query and executes it in the database.
+*   $row uses the special PHP function mysql_fetch_row that puts the query results into an array.
+*   $company_name  makes the first index in $row as company name. 
+*   $primary_industry makes the next index in $row as primary industry.  
+*   $lead_id makes the next infex in $row as lead ID.
+*/
 include_once("db_query.php");
 db_connection();
 
