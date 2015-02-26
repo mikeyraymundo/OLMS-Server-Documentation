@@ -167,7 +167,17 @@ function add_account($username, $password1, $password2, $fullname, $account_type
                 }          
 }
 
-
+/**
+*   This function allows the user to add a new country to the timezone functionality of the system.
+*   This function checks if the user field up all the required fields to be filled.
+*   This function also checks if the data to be added already exists in the database.
+*   
+*   @param string $state is a state for the country. Applicable to USA only.
+*   @param string $country is a country for the timezone
+*   @param string $selected_timezone is the timezone with respect to the country
+*   @param  $radio determines if the state belongs to only one timezone or is divided into two timezones. Applicable to US states only.
+*
+*/
 function add_country($state, $country, $selected_timezone, $radio)
 {       
     if( empty($country) || $selected_timezone=='Choose a Timezone')
@@ -196,6 +206,19 @@ function add_country($state, $country, $selected_timezone, $radio)
 
 }
 
+/**
+*   This function allows the user to add a new city to the timezone functionality of the system.
+*   This function checks if the user field up all the required fields to be filled.
+*   This function also checks if the data to be added already exists in the database.
+*   
+*   @param string $county is a county found in the USA.
+*   @param string $state is a state for the country. Applicable to USA only.
+*   @param string $country is a country for the timezone
+*   @param string $selected_timezone is the timezone with respect to the country
+*   @param string $city is a city found in the country.
+*   @param string $selected_timezone is the timezone selected from the dropdown list. 
+*
+*/
 function add_city($country, $state, $county, $city, $selected_timezone)
 {       
     if($country=='Choose a Country' ||empty($state)||$selected_timezone=='Choose a Timezone')
@@ -230,7 +253,6 @@ function add_city($country, $state, $county, $city, $selected_timezone)
             }  
         } 
     }     
-
 }
 
 /**
@@ -282,10 +304,13 @@ function add_campaign($campaign, $company)
 }
 
 /**
-*   This function allows 
+*   This function allows the user to add a new status in the database. It allows the system to check if
+*   all fields were filled up by the user. Furthermore, it also checks if the status to be added already
+*   exists in the database. 
 *
 *   @param string $status_name The name of the new status the user will input
 *   @param string $description The description of the new status
+*   @var resource
 */
 function add_status($status, $description)
 {
@@ -324,12 +349,25 @@ function assign_agents($user_id, $campaign_id)
         $insert_query=mysql_query("INSERT INTO agent_list (user_id, campaign_id) VALUES ('$user_id', '$campaign_id');");
     
 }
+
+/**
+*   This function allows the administrator to assign specific statuses to specific campaigns.
+*
+*   @param string $status_id The ID of the status to be added in the database.
+*   @param string $campaign_id The ID of the selected campaign to where the status will be added.
+*/
 function assign_statuses($status_id, $campaign_id)
 {
     
         $insert_query=mysql_query("INSERT INTO campaign_status (status_id, campaign_id) VALUES ('$status_id', '$campaign_id');");
     
 }
+
+/**
+*   This function allows the administrator to delete an account from the database.
+*   
+*   @param string $user_id The ID of the account to be deleted
+*/
 
 function delete_agent($user_id)
 {
@@ -392,6 +430,10 @@ function edit_account($update_id, $fullname, $username, $password,$password2, $a
 	}					
 }
 
+/**
+*   This function allows the system to be able to display all the accounts in the database in a tabular form.
+*
+*/
 function account_table()
 {
 $table="";
@@ -450,14 +492,24 @@ EOT;
 echo $table;
 }
 
+/**
+*   This function allows the administrator to assign leads to the campaign.
+*
+*   @param $checkbox indicates the selected leads to be assigned to the campaign.
+*   @param string $campaign_id The ID of the selected campaign where the leads will be assigned to.
+*/
 function assign_leads_to_campaign($checkbox, $campaign_id)
 {
     $date=date("Y-m-d H-i-s");
     $insert=mysql_query("INSERT INTO campaign_lead (campaign_id, lead_id, status_id, date_created) VALUES ('$campaign_id', '$checkbox', '1', '$date');");
-
 }
 
-
+/**
+*   This function allows the administrator to unassign agents from the campaign.
+*
+*   @param $checkbox indicates the selected agents to be unassigned from the specific campaign.
+*   @param string $campaign_id The ID of the campaign where the agents will be unassigned from.
+*/
 
 function unassign_agents($checkbox, $campaign_id)
 {
@@ -465,12 +517,16 @@ function unassign_agents($checkbox, $campaign_id)
     $insert=mysql_query("DELETE FROM agent_list WHERE user_id='$checkbox' AND campaign_id='$campaign_id';"); 
 }
 
+/**
+*   This function allows the administrator to unassign leads from the campaign.
+*
+*   @param $checkbox indicates the selected leads to be unassigned from the specific campaign.
+*   @param string $campaign_id The ID of the campaign where the leads will be unassigned from.
+*/
 function unassign_leads($checkbox, $campaign_id)
 {
     $insert=mysql_query("DELETE FROM campaign_lead  WHERE lead_id='$checkbox' AND campaign_id='$campaign_id';");
 }
-
-
 
 
 function update_campaign($update_campaign_id, $campaign_name, $company, $creation_date, $date_ended)
