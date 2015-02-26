@@ -1,4 +1,22 @@
 <?php
+
+/**
+* This function allows the system to display the table for campaign_management.php that can be refreshed according to the results of the queries in campaign_management.php.
+* This uses the function db_connection() from the file db_query.php.
+* It uses the special MySQL function mysql_select_db that selects the database to be used.
+*
+* $selected_campaign is a variable that contains the value of selected_campaign
+* $radio_selection is a variable that contains the valueof radio_selection.
+* $query contains the query to be executed in the MySQL database.
+* $result contains the special MySQL function mysql_query that runs $query.
+* $row contains the special MySQL function mysql_fetch_row that stores $result in an aray.
+* $name stores all of the data in the first column of the array(Agents)
+* $user_id stores all of the data in the second column of the array(Agents)
+* $company_name stores all of the data in the first column of the array(Leads)
+* $primary_industry stores all of the data in the second column of the array(Leads)
+* $lead_id stores all of the data in the third column of the array(Leads)
+* $status_id stores all of the data in the second column of the array(Status)
+*/
 include_once("db_query.php");
 db_connection();
         //SELECT DB
