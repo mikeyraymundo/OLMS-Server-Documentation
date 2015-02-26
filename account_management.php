@@ -39,6 +39,27 @@
 </head>
 
 <?php
+
+/**
+*   This function uses the function db_connection from db_query.php
+*   session_start() entails opening of a new page of account_management.php
+*
+*   $login_id is creating a new variable and assigning the specific input by the user to it.
+*   $name is creating a new variable for name and assigning the specific input bu the user to it.
+*   $select_query contains the query for MYySQL. In this case, it will select the user ID and name of an Agent account.
+*   $select_query_run is a resource and contains the special MySQL function mysql_query that will run $select_query 
+*   $row is a resource that contains the special MySQL query that stores the query results into an array.
+*   $agent_name stores the column "name" from the array "row"
+*   $agent_id stores the column "user_id" from the array "row"
+*
+*   $campaign_name stores the column "campaign_name" from the array "row"
+*   $campaign_id stores the column "campaign_id" from the array "row"
+*   If user selects "Delete", agent details in the database gets deleted.
+*   If user selects "Edit", redirection to edit_user.php 
+*   If user selects "Add User", user must input: username, password, re-enter password, fullname and account typ
+*   If user selects "Add Campaign", user must input: campaign name, company and creation date.
+*   If user selects " Assign Campaign", user assigns an agent into a campaign.
+*/   
     include_once("db_query.php");
     db_connection();
    // session_details();
@@ -47,7 +68,6 @@
     {
         header("location:login.php");
     }
-
 
      $login_id=$_SESSION['User_ID'];
     $name=$_SESSION['name'];
