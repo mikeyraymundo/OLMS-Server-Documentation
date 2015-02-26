@@ -38,6 +38,26 @@
 
 
 <?php
+
+/**
+* This allows the user to select an agent or a status to be assigned into a campaign.
+* This uses the db_query.php file for its database connection.
+* $select_query contains the query to be used in the database.
+* $select_query_run contains the special PHP function mysql_query that uses and runs $select_query.
+* $agentlist would contain the agent name results
+* $row contains the special PHP function mysql_fetch_array that places the results of $select_query_run in an array.
+* $agent_name would contain the column of 'name' from the $row array
+* $agent_id would contain the column of the 'user_id' column from the $row array
+* $statuslist would contain the status results
+* $status_name would contain the column of the 'status_name'from the $row array
+* $status_id would contain the column of the 'status_id' from the $row array
+* $campaighnlist would contain the campaign results
+* $campaign_name would contain the column of the 'campaign_name' from the $row array
+* $campaign_id would contain the column of the 'campaign_id' from the $row array
+* $leadlist would contain the leads under the specific campaign results
+*
+* @var resource
+*/
     include_once("db_query.php");
     db_connection();
     session_start();
@@ -220,6 +240,23 @@ while   ($row= mysql_fetch_array($select_query_run) )
       </div>  
 
       <?php
+
+      /**
+      * $content would contain the results
+      * $intent is the task that the user intends to be done
+      * $checkbox will store all those items selected 
+      * $campaign_id would contain the 'campaign_id' from the database
+      * unassign_leads is used here for those $campaign_id with those selected corresponding $checkbox to be unassigned leads
+      * unassign_agents is used here for those $campaign_id with those selected corresponding $checkbox to be unassigned to selected agents
+      * assign_agents is used here for those $campaign_id with those selected corresponding $checkbox to be assigned to selected agents
+      * $get_name contains a special PHP function mysql_query. It contains the query to be used in the database.
+      * $row contains the special PHP function mysql_fetch_row. This function retrieves the results of the query and puts them in an array.
+      * extract is a special PHP function. It retrieves the elements of $row
+      * $name contains a special PHP function mysql_escape_string. It stores the first column of the array $row
+      *
+      * @var resource
+      *
+      */
     $content =<<<EOT
     <div class="col-lg-12">
       <div class="panel panel-yellow">
