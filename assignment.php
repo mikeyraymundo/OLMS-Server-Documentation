@@ -40,12 +40,23 @@
 /**
 * This function allows the administrator to assign leads to a campaign and also assign leads to an agent belonging to a specific industry.
 * This function uses the db_connection() function from the db_query.php file.
+* This function checks if the user input a specific number of leads to be assigned to an agent.
 *
 * $login_id contains the specific User_ID for that session.
 * $name contains the specific name of the user for that session.
 * $get_name contains the special MySQL function mysql_query that selects the campaign name
 * $row puts the results of the $get_name query into an array.
 * $name stores the selected campaign from the array
+* $select_query stores the query to be used in the MySQL database.
+* $select_query_run contains the special MySQL function mysql_query which uses $select_query to execute it on the database.
+* $campaign_name stores the campaign name of the results of the query into a variable.
+* $campaign_id stores the campaign ID of the results of the query into a variable.
+* $leadlist is a variable that will generate the dropdown list of all the campaign names.
+* $agent_name stores the agent name of the results of the query into a variable.
+* $agent_id stores the agent ID of the results of the query into a variable.
+* $agentlist is a variable that will generate the dropdown list of all the agents.
+* $primary_industry stores the primary industries of the results of the query into a variable.
+* $industrylist is a variable that will generate the dropdown list of all the primary industries. 
 *
 */
     include_once("db_query.php");
