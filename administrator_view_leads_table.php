@@ -1,4 +1,18 @@
 <?php
+
+/**
+*   This function allows the user to select a certain filter for leads. A possible filters would be "flagged leads".
+*
+*  It uses the db_connection function from db_query.php to connect to the database.
+*  $filter_connection contains the special function $_POST that retrieves the choice of the user from the dropdown list.
+*  $query is a resource and references PHP's special built-in mysql_query function. The mysql_query contains the MySQL query to be used in the database.
+* 
+*  If the user selects "all" as it's filter, the system will display a table that contains all lead details including the campaign name, contact's full name, agent assigned and when it was last updated.
+*  If the user selects "flagged leads"  as it's filter, the system will display a table of all the flagged leads in the database.
+*  The user can also select a different filter depending on his desire. 
+*   
+*
+*/
 include_once("db_query.php");
     db_connection();
 
