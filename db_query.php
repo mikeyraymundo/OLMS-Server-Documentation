@@ -340,8 +340,8 @@ function add_status($status, $description)
 *   $insert_query passes a unique query to the currently active database on the server.
 *   It inserts the user_id and campaign_id into the agent_list
 *
-*   @param string $user_id The ID of the agent that exists in the database
-*   @param string $campaign_id The ID of the campaign that exists in the database where the selected agents will be assigned to
+*   @param int $user_id The ID of the agent that exists in the database
+*   @param int $campaign_id The ID of the campaign that exists in the database where the selected agents will be assigned to
 */
 function assign_agents($user_id, $campaign_id)
 {
@@ -353,8 +353,8 @@ function assign_agents($user_id, $campaign_id)
 /**
 *   This function allows the administrator to assign specific statuses to specific campaigns.
 *
-*   @param string $status_id The ID of the status to be added in the database.
-*   @param string $campaign_id The ID of the selected campaign to where the status will be added.
+*   @param int $status_id The ID of the status to be added in the database.
+*   @param int $campaign_id The ID of the selected campaign to where the status will be added.
 */
 function assign_statuses($status_id, $campaign_id)
 {
@@ -366,7 +366,7 @@ function assign_statuses($status_id, $campaign_id)
 /**
 *   This function allows the administrator to delete an account from the database.
 *   
-*   @param string $user_id The ID of the account to be deleted
+*   @param int $user_id The ID of the account to be deleted
 */
 
 function delete_agent($user_id)
@@ -388,7 +388,7 @@ function delete_agent($user_id)
 *   $updatequery passes a unique query to the currently active database on the server.
 *   It inserts the new first name, middle name, last name, username and password into the account
 *
-*   @param string $update_id The account ID that the details will be updated that exists in the database
+*   @param int $update_id The account ID that the details will be updated that exists in the database
 *   @param string $fullname The first name, middle name, and last name of the account to be updated in the database
 *   @param string $username The username of the account to be updated in the database
 *   @param string $password The password of the account to be updated in the database
@@ -496,7 +496,7 @@ echo $table;
 *   This function allows the administrator to assign leads to the campaign.
 *
 *   @param $checkbox indicates the selected leads to be assigned to the campaign.
-*   @param string $campaign_id The ID of the selected campaign where the leads will be assigned to.
+*   @param int $campaign_id The ID of the selected campaign where the leads will be assigned to.
 */
 function assign_leads_to_campaign($checkbox, $campaign_id)
 {
@@ -508,7 +508,7 @@ function assign_leads_to_campaign($checkbox, $campaign_id)
 *   This function allows the administrator to unassign agents from the campaign.
 *
 *   @param $checkbox indicates the selected agents to be unassigned from the specific campaign.
-*   @param string $campaign_id The ID of the campaign where the agents will be unassigned from.
+*   @param int $campaign_id The ID of the campaign where the agents will be unassigned from.
 */
 
 function unassign_agents($checkbox, $campaign_id)
@@ -528,7 +528,16 @@ function unassign_leads($checkbox, $campaign_id)
     $insert=mysql_query("DELETE FROM campaign_lead  WHERE lead_id='$checkbox' AND campaign_id='$campaign_id';");
 }
 
-
+/**
+*   This function allows the administrator to update the details of a campaign.
+*   This function checks if all the fields needed in this page was filled up properly.
+*
+*   @param string $campaign_name The name of the campaign to be updated
+*   @param int $update_campaign_id The ID of the selected campaign to be updated
+*   @param string $company The company of the specific campaign
+*   @param $creation_date The date the campaign was created
+*   @param $date_ended The date the campaign ended
+*/
 function update_campaign($update_campaign_id, $campaign_name, $company, $creation_date, $date_ended)
 {
     if(empty($campaign_name) || empty($company) ||   empty($creation_date) )
@@ -548,6 +557,14 @@ function update_campaign($update_campaign_id, $campaign_name, $company, $creatio
         echo "<script type='text/javascript'>alert('Updated Campaign'); location.href='campaign_management.php'</script>";                   
     }   
 }
+/**
+*   This function allows the administrator to assign leads to agents.
+*
+*   @param string $selected_agent Indicates the selected agent where the leads will be assigned to.
+*   @param string $industry The industry where the leads to be assigned to the agent belongs to.
+*   @param $number_assign The amount of leads from each industry that the user want to assign to the agent.
+*   @param $radio determines if the leads are newly assigned or they will be re-assigned to the specific agent.
+*/
 function assign_leads_to_agents($selected_agent,$industry, $number_assign, $radio)
 {
     if($radio=="New"){
@@ -566,12 +583,35 @@ function assign_leads_to_agents($selected_agent,$industry, $number_assign, $radi
     }
     
 }
+/**
+*   This function allows the user to see the assigned campaigns to him/her.
+*
+*   @param int $login_id is the ID of the account currently logged-in.
+*/
 
 function display_assigned_campaigns($login_id)
 {
     $query=mysql_query("SELECT campaign_name FROM agent_list a, campaign c WHERE c.campaign_id=a.campaign_id AND user_id='$login_id';");
 }
 
+/**
+*   This function allows the user to update the lead details.
+*   It also checks if there was really a change made with the lead details.
+*
+*   @param string $first_name The first name of the contact of the lead
+*   @param string $middle_name The middle name of the contact of the lead
+*   @param string $last_name The last name of the contact of the lead
+*   @param string $company The company of the lead
+*   @param string $state The state where the lead is located
+*   @param string $email The email of the lead
+*   @param string $title The title/salutation of the lead
+*   @param int $lead_id The ID of the lead
+*   @param int $user_id The ID of the logged-in account
+*   @param string $selected_campaign The specific campaign where the lead is assigned to
+*   @param varchar $phone_number The phone number of the lead
+*   @param string $city The city where the lead is located
+*   @param string $country The country where the lead is located
+*/
 function update_lead_details($first_name, $middle_name, $last_name, $company, $state,$email, $title, $lead_id,$user_id,$selected_campaign, $phone_number, $city, $country )
 {
     $lead_change_checker=mysql_query("SELECT contact_first_name, contact_middle_name, contact_last_name, contact_title, company_name, primary_state, email, phone_number, primary_city, primary_country
@@ -605,8 +645,7 @@ function update_lead_details($first_name, $middle_name, $last_name, $company, $s
         {
             echo "<script type='text/javascript'>alert('You did not make any changes!'); </script>";
         }
-    }
-    
+    } 
 }
 
 function update_lead($filter_selection, $selected_status, $notes, $lead_id,$user_id,$selected_campaign,$callback_date, $state2, $country2, $city2, $county2)
