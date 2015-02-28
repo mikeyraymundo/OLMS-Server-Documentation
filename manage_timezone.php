@@ -39,6 +39,25 @@
 </head>
 
 <?php
+
+/**
+ *	This module allows the user to add a country and a corresponding state as well as select from
+ *	a dropdown list the timezone in which the state belongs to. It also allows the administrator
+ *	to state whether the state belongs in one or two timezones. This module also allows the 
+ *	the administrator to add a county and city in addition. Again, the administrator is able to
+ *	select from a dropdown list from which timezone the county is to be assigned to. When adding 
+ *	a city or county, state cannot be null. The assumption is that the user has adequate knowledge
+ *	on timezones.
+ *
+ *	extract() imports variables into the current symbol table from an array. It also  Checks each
+ *	key to see whether it has a valid variable name. It also checks for collisions with existing 
+ *	variables in the symbol table. 
+ *	$countrylist - the list of all the countries in the database. These appear in the dropdown lists
+ *	$timezonelist - the list of timezones the administrator can choose from
+ *
+ *	@var resource
+ */
+
     include_once("db_query.php");
     db_connection();
    // session_details();
@@ -48,8 +67,8 @@
         header("location:login.php");
     }
 
-     $login_id=$_SESSION['User_ID'];
-    $name=$_SESSION['name'];
+     	$login_id=$_SESSION['User_ID'];
+    	$name=$_SESSION['name'];
     if(isset($_POST['intent']))
     {
             
