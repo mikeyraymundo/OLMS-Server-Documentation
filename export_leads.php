@@ -1,5 +1,6 @@
 <?php
-/**
+
+ /**
  *	This module allows the user to export leads into a .csv file. The function sets the 
  *	first row of the csv file as containing detail headers such as contact_prefix, company_name,
  *	phone numbers etc. 
@@ -9,6 +10,35 @@
  *	"mysql_set_charset" sets the client character set. It sets the default character set 
  *	for the current connection. UTF8 is used. UTF8 is once again selected in 
  *	mb_internal_encoding. A valid character set must be used.
+ *
+ *	$contact_prefix - e.g. Mr. or Ms.
+ *	$contact_first_name - the first name of the lead
+ *	$contact_middle_name - the middle name of the lead if he/she has one
+ *	$contact_last_name - the last name of the lead
+ *	$contact_suffix - e.g. Jr. or III
+ *	$contact_title - job title of lead such as "Director" or "Secretary"
+ *	$company_name - name of the lead's company
+ *	$primary_add_1 - the primary address of the lead
+ *	$primary_add_2 - the contact's second primary address
+ *	$primary_city - the CITY of the contact
+ *	$primary_county - the COUNTY of the contact if county applies (e.g. United States)
+ *	$primary_state - state of the lead e.g. California, Oregon, New South Wales
+ *	$primary_zip - the zip code of the contact such as "90210" (US) or "2019" (NZ)
+ *	$primary_zip_extension - extension of contact's zip 
+ *	$primary_country - the country of where the lead resides
+ *	$phone_number - the lead's phone number
+ *	$toll_free - the toll free numer of the lead
+ *	$fax_number - the lead's fax number
+ *	$web_address - the mailing address of the user
+ *	$latitude - the horizontal coordinate of the lead's location e.g. "-33.940661"
+ *	$longtitude - the vertical coordinate of the lead's location e.g. "151.195087"
+ *	$line_of_business - the primary business of the lead e.g. "Freight transportation arrangement, nsk" / "Towing and tugboat service"
+ *	$is_importer - whether the lead imports
+ *	$is_exporter - whether the lead exports
+ *	$total_employees - the total number of employees of the company where the lead works
+ *	$year_founded - date when company of lead was established
+ *	$primary_industry - the industry of the company of the lead e.g. "Transportation Services Sector" / "Accounting"
+ *	$Email - the electronic mailing address of the contact
  *
  *	@var resource
  *
@@ -88,7 +118,9 @@
       }
     }
 
-
+/* 
+if you import without selecting any file, system will display error
+*/
 if(isset($_FILES['myfile']))
 {
     if(!file_exists($_FILES['myfile']['tmp_name']) || !is_uploaded_file($_FILES['myfile']['tmp_name'])) 
@@ -130,7 +162,11 @@ if($fileExists == "YES")
 
                 if($leadCount == 0)
                 {
-                    
+                    /*  if there is no header in the csv file, the system will prompt an error 
+                     *	skips the first lead as the system always assumes the first row in the
+                     *	csv file is the header
+                     *
+                     */
                 }
                 elseif($leadCount > 0)
                 {
@@ -164,7 +200,9 @@ if($fileExists == "YES")
                         $Email = trim($leadContent[27]);
 
                         
-
+						/*	To make sure that special requirements are allowed
+						 *	code handles special characters
+						 */
                         $contact_prefix = str_replace(
                          array("\xe2\x80\x98", "\xe2\x80\x99", "\xe2\x80\x9c", "\xe2\x80\x9d", "\xe2\x80\x93", "\xe2\x80\x94", "\xe2\x80\xa6"),
                          array("'", "'", '"', '"', '-', '--', '...'),
@@ -449,6 +487,9 @@ if($fileExists == "YES")
                          $primary_industry = iconv('ISO-8859-1', 'UTF-8', $primary_industry);
                          $Email = iconv('ISO-8859-1', 'UTF-8', $Email);
 
+						/*
+						 *	Allows escaping of special characters in a string for use in an SQL statement
+						 */
                         $contact_prefix = mysql_real_escape_string($contact_prefix);
                         $contact_first_name = mysql_real_escape_string($contact_first_name);
                         $contact_middle_name = mysql_real_escape_string($contact_middle_name);
@@ -552,7 +593,11 @@ if($fileExists == "YES")
     
 }
 
-
+/*
+ *	Some details cannot be null as they are the primary keys of the lead
+ *
+ *
+ */
 if ($nullSwitch == "OPEN" && $whiteSpaceSwitch == "OPEN")
 {
     $insertCount = "0";
