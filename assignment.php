@@ -57,7 +57,8 @@
 * $agentlist is a variable that will generate the dropdown list of all the agents.
 * $primary_industry stores the primary industries of the results of the query into a variable.
 * $industrylist is a variable that will generate the dropdown list of all the primary industries. 
-*
+* 
+* @var resource
 */
     include_once("db_query.php");
     db_connection();

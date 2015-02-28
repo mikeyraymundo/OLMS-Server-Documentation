@@ -59,7 +59,8 @@
 *   If user selects "Add User", user must input: username, password, re-enter password, fullname and account typ
 *   If user selects "Add Campaign", user must input: campaign name, company and creation date.
 *   If user selects " Assign Campaign", user assigns an agent into a campaign.
-*/   
+*   @var Resource
+*/  
     include_once("db_query.php");
     db_connection();
    // session_details();

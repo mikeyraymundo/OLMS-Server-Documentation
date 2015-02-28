@@ -16,6 +16,8 @@
 * $primary_industry stores all of the data in the second column of the array(Leads)
 * $lead_id stores all of the data in the third column of the array(Leads)
 * $status_id stores all of the data in the second column of the array(Status)
+*
+* @var resource
 */
 include_once("db_query.php");
 db_connection();

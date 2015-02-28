@@ -11,6 +11,8 @@
 *   $company_name  makes the first index in $row as company name. 
 *   $primary_industry makes the next index in $row as primary industry.  
 *   $lead_id makes the next infex in $row as lead ID.
+*
+*   @var resource
 */
 include_once("db_query.php");
 db_connection();

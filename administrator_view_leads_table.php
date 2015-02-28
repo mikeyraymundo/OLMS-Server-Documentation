@@ -11,7 +11,7 @@
 *  If the user selects "flagged leads"  as it's filter, the system will display a table of all the flagged leads in the database.
 *  The user can also select a different filter depending on his desire. 
 *   
-*
+*   @var resource
 */
 include_once("db_query.php");
     db_connection();
