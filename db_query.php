@@ -648,6 +648,22 @@ function update_lead_details($first_name, $middle_name, $last_name, $company, $s
     } 
 }
 
+/**
+*   This function allows the user to update the lead status
+*   It also checks if a timezone is assignedto the specific lead if callback status is set.
+*
+*   @param string $filter_selection The industry of the lead to be updated
+*   @param string $selected_status The new status of the lead
+*   @param string $notes The notes that the user input
+*   @param int $lead_id The ID of the lead
+*   @param int $user_id The ID of the logged-in account
+*   @param string $selected_campaign The specific campaign where the lead is assigned to
+*   @param datetime $callback_date The callback date assigned by the agent
+*   @param string $state2 The timezone of the state where the lead belongs to
+*   @param string $country2 The timezone of the country where the lead belongs to
+*   @param string $city2 The timezone of the city where the lead belongs to
+*   @param string $county2 The timezone of the city where the lead belongs to
+*/
 function update_lead($filter_selection, $selected_status, $notes, $lead_id,$user_id,$selected_campaign,$callback_date, $state2, $country2, $city2, $county2)
 {
     if($selected_status=="12")
@@ -726,10 +742,7 @@ function update_lead($filter_selection, $selected_status, $notes, $lead_id,$user
                 $archive=mysql_query("INSERT INTO call_history (user_id, campaign_id, lead_id, call_date, status_id) VALUES ('$user_id','$selected_campaign', '$lead_id', '$date', '$selected_status');");
                 echo "<script type='text/javascript'>alert('Successfully updated Lead. Callback should be made on $converted_date'); </script>";
             }
-        }
-        
-
-        
+        }     
     }
     else
     {
@@ -740,6 +753,12 @@ function update_lead($filter_selection, $selected_status, $notes, $lead_id,$user
     }
 }
 
+/**
+* This function allows the user to delete a lead and all its records from the database.
+*
+* @param int $lead_id The ID of the lead to be deleted
+*/
+
 function delete_all_records_of_lead($lead_id)
 {
     $delete = mysql_query("DELETE FROM lead WHERE lead_id = $lead_id");
@@ -747,6 +766,12 @@ function delete_all_records_of_lead($lead_id)
     $delete = mysql_query("DELETE FROM call_history WHERE lead_id = $lead_id");
     $delete = mysql_query("DELETE FROM flagged_leads WHERE lead_id = $lead_id");
 }
+
+/**
+* This function allows the user to assign all leads into a campaign
+*
+* @param int $campaign_id The ID of the campaign where all of the leads will be assigned to.
+*/
 function all_leads_assign_to_campaign($campaign_id)
 {
     $date=date("Y-m-d H-i-s");
@@ -763,6 +788,12 @@ function all_leads_assign_to_campaign($campaign_id)
     }
 
 }
+
+/**
+* This function allows the user to generate reports depending on the date he/she selected.
+*
+* @param date $report_date The date of the report that is desired to be generated.
+*/
 function generate_report($report_date)
 {
     error_reporting(E_ALL);
