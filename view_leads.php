@@ -1,5 +1,19 @@
 <?php 
 
+/**
+* This function uses the db_connection() function fromthe db_query.php file.
+* This function allows the user to view the the leads in the database. 
+* Furthermore, it allows the user to select a specific date to produce a report.
+*
+* $date contains the date that the user selected from the date picker.
+* $lead_id contains the specific ID of the lead to be deleted.
+* $select_query contains the query to be executed in the database.
+* $statuslist A dropdown list of all statuses
+* $row contains a special PHP function mysql_fetch_array that retrieves the results of the query into an array.
+* $status_name is used to store the data[status_name] from the results of the query
+* $status_id is used to store the data[status_id] from the results of the query
+*
+*/
 include_once("db_query.php");
     db_connection();
     session_start();
