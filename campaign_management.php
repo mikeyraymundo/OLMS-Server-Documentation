@@ -40,24 +40,28 @@
 <?php
 
 /**
-* This allows the user to select an agent or a status to be assigned into a campaign.
-* This uses the db_query.php file for its database connection.
-* $select_query contains the query to be used in the database.
-* $select_query_run contains the special PHP function mysql_query that uses and runs $select_query.
-* $agentlist would contain the agent name results
-* $row contains the special PHP function mysql_fetch_array that places the results of $select_query_run in an array.
-* $agent_name would contain the column of 'name' from the $row array
-* $agent_id would contain the column of the 'user_id' column from the $row array
-* $statuslist would contain the status results
-* $status_name would contain the column of the 'status_name'from the $row array
-* $status_id would contain the column of the 'status_id' from the $row array
-* $campaighnlist would contain the campaign results
-* $campaign_name would contain the column of the 'campaign_name' from the $row array
-* $campaign_id would contain the column of the 'campaign_id' from the $row array
-* $leadlist would contain the leads under the specific campaign results
-*
-* @var resource
+ *	This module allows the user to select an agent or a status to be assigned or unassigned 
+ *	into or out of a campaign. Leads can also be unassigned. This uses the db_query.php file 
+ *	for its database connection. Addition and editing of statuses is done within this module. 
+ *	Adding and editing campaign details are done through this module.
+ *
+ * 	$select_query contains the query to be used in the database.
+ * 	$select_query_run contains the special PHP function mysql_query that uses and runs $select_query.
+ * 	$agentlist would contain the agent name results
+ * 	$row contains the special PHP function mysql_fetch_array that places the results of $select_query_run in an array.
+ * 	$agent_name would contain the column of 'name' from the $row array
+ * 	$agent_id would contain the column of the 'user_id' column from the $row array
+ * 	$statuslist would contain the status results
+ * 	$status_name would contain the column of the 'status_name'from the $row array
+ * 	$status_id would contain the column of the 'status_id' from the $row array
+ * 	$campaighnlist would contain the campaign results
+ * 	$campaign_name would contain the column of the 'campaign_name' from the $row array
+ * 	$campaign_id would contain the column of the 'campaign_id' from the $row array
+ * 	$leadlist would contain the leads under the specific campaign results
+ *
+ * 	@var resource
 */
+
     include_once("db_query.php");
     db_connection();
     session_start();
