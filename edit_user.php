@@ -24,16 +24,23 @@
 
 </head>
 <?php
+
+/**
+* This function uses the db_connection() function from the db_query.php to connect to the database.
+* This uses the special MySQL function mysql_select_db to select the database to be used.
+*
+* $update_id The user ID of the selected account to be updated
+* $searchquery contains the query to be executed in the MySQL database.
+* $result stores the results of the executuon of the query.
+* $row puts $result into an array.
+* $account_type determines the type of account to be edited.
+*/
 	//CREATE DB CONNECTION
 	include_once("db_query.php");
 	db_connection();
- mysql_select_db("wts_olms", $db);
+    mysql_select_db("wts_olms", $db);
 	session_start();
 
-	
-		
-	
-	
 $update_id=$_SESSION['update_id'];
 if(isset($_POST['intent']))
 	{
@@ -46,9 +53,7 @@ if(isset($_POST['intent']))
 	$searchquery="SELECT * FROM account WHERE user_id='$update_id'";
 	$result=mysql_query($searchquery);
 	$row=mysql_fetch_row($result);
-	$account_type=$row[4];
-
-	
+	$account_type=$row[4];	
 ?>
 
 <body>
