@@ -64,6 +64,7 @@
     session_start();
     if (empty($_SESSION))
     {
+    	
         header("location:login.php");
     }
 
@@ -71,7 +72,8 @@
     	$name=$_SESSION['name'];
     if(isset($_POST['intent']))
     {
-            
+        /* extract used here
+        */    
         extract($_POST);
         if($intent == "add_country")
         {              
