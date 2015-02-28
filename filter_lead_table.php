@@ -1,16 +1,16 @@
 <?php
 
-	/**
-*	Allows user to filter the leads located in the table according to a specific filter in
-*	the dropdown list. The filter consists of statuses assigned to a campaign. Examples of 
-*	possible criteria in the filter include the statuses, "Call back in x days", "Hard no",
-*	"Wrong number", etc.
-*
-*	$filter_selection stores the criterion that the user chooses for filtering
-*	$selected_campaign stores whichever campaign the user chose for filtering
-*	
-*	@var resource
-*/
+/**
+ *	Allows user to filter the leads located in the table according to a specific filter in
+ *	the dropdown list. The filter consists of statuses assigned to a campaign. Examples of 
+ *	possible criteria in the filter include the statuses, "Call back in x days", "Hard no",
+ *	"Wrong number", etc.
+ *
+ *	$filter_selection stores the criterion that the user chooses for filtering
+ *	$selected_campaign stores whichever campaign the user chose for filtering
+ *	
+ *	@var resource
+ */
 
     include_once("db_query.php");
 db_connection();

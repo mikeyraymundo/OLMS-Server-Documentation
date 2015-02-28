@@ -30,6 +30,8 @@
 *	according to campaign id. The update_campaign function is called.
 *	
 *	$searchquery gets the value searched in campaign table according to campaign id
+*	$intent serves as the placeholder variable that will store the user's choice of 
+*	updating a campaign.
 *
 *	@var resource
 *	
