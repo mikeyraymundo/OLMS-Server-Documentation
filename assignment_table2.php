@@ -1,23 +1,24 @@
 <?php
 
 /**
-*   This function displays the result of the specific query/selection made by the user in a table form.
-* 
-*  This function uses the db_connection() function from the db_query.php file.
-*   $selected_agent stores the entry of the user for "selected agent"
-*   $radio_selection stores the selection of the user from the radioboxes.
-*   $table shows the results and puts them in a table format
-*   $query contains the query to be used in MySQL
-*   $result contains the special PHP function mysql_query which runs $query.
-*   $row contains the special MySQL function mysql_fetch_row that stores $result into an array.
-*   $company_name assigns the first column of the array $row as such
-*   $primary_industry assigns the next column of the array $row as such
-*   $campaign_name assigns the next column of the array $row as such 
-*   $lead_id assigns the next column of the array $row as such
-*   $agent_name assigns the next column $row as such
-*
-*   @var resource
-*/
+ *   This function displays the result of the specific query or selection made by the user 
+ *	in table form.
+ * 
+ *   This function uses the db_connection() function from the db_query.php file.
+ *   $selected_agent stores the entry of the user for "selected agent"
+ *   $radio_selection stores the selection of the user from the radioboxes.
+ *   $table shows the results and puts them in a table format
+ *   $query contains the query to be used in MySQL
+ *   $result contains the special PHP function mysql_query which runs $query.
+ *   $row contains the special MySQL function mysql_fetch_row that stores $result into an array.
+ *   $company_name assigns the first column of the array $row as such
+ *   $primary_industry assigns the next column of the array $row as such
+ *   $campaign_name assigns the next column of the array $row as such 
+ *   $lead_id assigns the next column of the array $row as such
+ *   $agent_name assigns the next column $row as such
+ *
+ *   @var resource
+ */
 include_once("db_query.php");
 db_connection();
 
