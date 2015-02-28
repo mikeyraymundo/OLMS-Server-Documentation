@@ -33,7 +33,7 @@
 *	$intent serves as the placeholder variable that will store the user's choice of 
 *	updating a campaign.
 *
-*	@var resource
+*	@var resource 
 *	
 */
 

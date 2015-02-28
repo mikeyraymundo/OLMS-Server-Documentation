@@ -76,7 +76,7 @@
 <?php
 
 /**
-*	This module allows the user to log in to the system
+*	This module allows the user to log in to the system with a userame and password
 *	If a user has been assigned an ADMINISTRATOR account, he/she will be taken to the View Leads page
 *	If a user has been assigned an AGENT account, he/she will be taken to the Manage Leads page
 *	In this page, the website connects to the database to determine which user accounts are administrators or agents

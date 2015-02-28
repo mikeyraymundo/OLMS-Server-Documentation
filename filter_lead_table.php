@@ -8,7 +8,9 @@
  *
  *	$filter_selection stores the criterion that the user chooses for filtering
  *	$selected_campaign stores whichever campaign the user chose for filtering
- *	
+ *	$callback_date is the date when the agent is to call the lead back again based on 
+ *	what both parties agreed upon
+ *
  *	@var resource
  */
 

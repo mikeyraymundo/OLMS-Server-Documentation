@@ -1,7 +1,8 @@
 <?php
 
 /**
- *	Allows user to logout of the current session
+ *	Allows user to logout of the current session. This is triggered by clicking on the 
+ *	logout button.
  *
  *	session_destroy() destroys all of the data associated with the current session. It does not 
  *	unset any of the global variables associated with the session, or unset the session cookie.

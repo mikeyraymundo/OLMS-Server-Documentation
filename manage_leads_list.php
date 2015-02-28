@@ -40,10 +40,11 @@
 <?php
 
 /**
-*	This module allows the system to manage the lit of leads according to status id
+*	This module allows the system to manage the list of leads according to status id
 *
 *	$select_query is the query that allows selection of status id from statuses in a 
 *	specific campaign 
+*	$status_name is the name of the specific status of a lead
 *
 *	@var resource
 */

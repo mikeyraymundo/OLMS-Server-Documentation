@@ -49,12 +49,12 @@
 *	include_once is a control structure that evaluates the specified file during the 
 *	execution of the script
 *
-*	'session_start' is a session function that creates a session or resumes the current 
+*	session_start() is a session function that creates a session or resumes the current 
 *	one based on a session identifier passed via a GET or POST request, or passed via a 
 *	cookie. 
-*	'date_default_timezone_set' is a function that sets the default timezone used by all 
+*	date_default_timezone_set() is a function that sets the default timezone used by all 
 *	date/time functions in a script 
-*	'extract' is a an array function that allows importing variables into the current 
+*	extract() is a an array function that allows importing variables into the current 
 *	symbol table from an array
 *
 *	$lead_history_query	checks if there have been changes done to a certain lead

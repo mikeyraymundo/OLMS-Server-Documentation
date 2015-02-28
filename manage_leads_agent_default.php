@@ -42,7 +42,10 @@
 
 /**
  *	This function sets up the table for managing leads on the agent's perspective. It sets
- *	the default setup of manage leads module.			
+ *	the default setup of manage leads module.
+ *
+ *	session_start() already defined in login module
+ *			
  */
  
     include_once("db_query.php");
