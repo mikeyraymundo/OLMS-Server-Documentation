@@ -34,6 +34,8 @@
 * $result stores the results of the executuon of the query.
 * $row puts $result into an array.
 * $account_type determines the type of account to be edited.
+*
+* @var resource
 */
 	//CREATE DB CONNECTION
 	include_once("db_query.php");
